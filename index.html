@@ -1,90 +1,85 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Explicit Lotus Fashion</title>
-<style>
-*{box-sizing:border-box}body{margin:0;background:#080808;color:#fff;font-family:Arial,sans-serif}a{text-decoration:none;color:inherit}
-header{position:sticky;top:0;z-index:10;background:#080808;border-bottom:1px solid #333;padding:18px 6%;display:flex;justify-content:space-between;align-items:center}
-.logo{font-weight:900;letter-spacing:1px}.red{color:#e00000}nav{display:flex;gap:24px;align-items:center}nav a:hover{color:#e00000}
-button,.btn{cursor:pointer;border:0;font-weight:900}.cartbtn{background:#e00000;color:white;padding:10px 15px}
-.hero{min-height:78vh;padding:100px 8%;display:flex;align-items:center;background:radial-gradient(circle at 75% 50%,#700000 0,transparent 28%),linear-gradient(135deg,#080808,#190000,#080808)}
-.hero div{max-width:800px}.tag{color:#e00000;letter-spacing:5px;font-weight:900}.hero h1{font-size:clamp(3.5rem,9vw,8rem);line-height:.88;margin:20px 0;text-transform:uppercase}.hero p{color:#ccc;font-size:1.15rem;max-width:600px}.btn{display:inline-block;background:#e00000;color:#fff;padding:15px 24px;margin-top:15px}
-section{padding:80px 7%}.center{text-align:center}.about{background:#111}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}.card{background:#181818;padding:30px;border-left:4px solid #e00000}.shop{background:#090909}.products{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}.product{background:#151515;border:1px solid #333}.pic{height:280px;display:grid;place-items:center;background:linear-gradient(145deg,#222,#430000);font-size:2rem;font-weight:900;text-align:center}.pic span{color:#e00000}.info{padding:20px}.info p{color:#aaa}.add{width:100%;padding:13px;background:#fff;color:#000}.add:hover{background:#e00000;color:#fff}
-footer{text-align:center;padding:30px;color:#777;border-top:1px solid #222}
-.overlay{display:none;position:fixed;inset:0;background:#000b;z-index:20}.overlay.show{display:block}.cart{position:absolute;right:0;top:0;height:100%;width:min(430px,100%);background:#111;padding:30px;overflow:auto;border-left:3px solid #e00000}.close{float:right;background:none;color:#fff;font-size:30px}.item{padding:18px 0;border-bottom:1px solid #333;display:flex;justify-content:space-between}.remove{background:none;color:#e00000}.total{display:flex;justify-content:space-between;font-size:20px;margin:25px 0}
-@media(max-width:750px){header{flex-wrap:wrap}nav{width:100%;justify-content:center;margin-top:15px;gap:14px}.cards,.products{grid-template-columns:1fr}.hero{min-height:70vh;padding:70px 7%}section{padding:60px 6%}}
-</style>
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 <header>
-<a class="logo" href="#home">THE EXPLICIT <span class="red">LOTUS</span> FASHION</a>
-<nav><a href="#home">Home</a><a href="#about">About</a><a href="#shop">Shop</a><button class="cartbtn" onclick="openCart()">Cart (<span id="count">0</span>)</button></nav>
+<a class="logo" href="#home">THE EXPLICIT <b>LOTUS</b> FASHION</a>
+<nav><a href="#home">Home</a><a href="#about">About</a><a href="#shop">Shop</a></nav>
+<button id="openCart">CART <span id="count">0</span></button>
 </header>
 
-<section class="hero" id="home"><div>
-<div class="tag">RED • BLACK • BOLD</div>
-<h1>Wear Your <span class="red">Lotus.</span></h1>
-<p>Streetwear with a fearless edge. Discover The Explicit Lotus Fashion collection.</p>
-<a class="btn" href="#shop">SHOP THE COLLECTION</a>
-</div></section>
-
-<section class="about" id="about">
-<div class="center"><div class="tag">OUR STORY</div><h2>Built to <span class="red">stand out.</span></h2></div>
-<div class="cards">
-<div class="card"><h3>The Vision</h3><p>Bold style, creative energy, and individuality come together in every piece.</p></div>
-<div class="card"><h3>The Lotus</h3><p>The lotus represents growth, transformation, and making your own path.</p></div>
-<div class="card"><h3>Your Statement</h3><p>Clothing designed to give your wardrobe personality and attitude.</p></div>
-</div>
+<section id="home" class="hero">
+<div><small>INDEPENDENT STREETWEAR</small>
+<h1>THE EXPLICIT<br><em>LOTUS</em> FASHION</h1>
+<p>Distressed denim. Custom details. Your style, your statement.</p>
+<a class="btn" href="#shop">SHOP THE DROP</a></div>
 </section>
 
-<section class="shop" id="shop">
-<div class="center"><div class="tag">THE COLLECTION</div><h2>Shop <span class="red">Lotus.</span></h2></div>
-<div class="products" id="products"></div>
+<section id="about" class="section about">
+<small>ABOUT THE BRAND</small><h2>MADE TO STAND OUT.</h2>
+<p>The Explicit Lotus Fashion is built around bold streetwear, custom denim, distressed details and limited pieces made to have their own attitude.</p>
 </section>
 
-<footer>© 2026 The Explicit Lotus Fashion. All rights reserved.</footer>
+<section id="shop" class="section shop">
+<div class="heading"><div><small>THE CURRENT DROP</small><h2>SHOP</h2></div><p>Limited pieces • Sizes shown on each item</p></div>
+<div id="products" class="grid"></div>
+</section>
 
-<div class="overlay" id="overlay" onclick="closeCart(event)">
-<div class="cart" onclick="event.stopPropagation()">
-<button class="close" onclick="closeCart()">×</button>
-<h2>Your Cart</h2><div id="items"></div>
-<div class="total"><span>Total</span><b id="total">$0.00</b></div>
-<button class="btn" style="width:100%" onclick="checkout()">CHECKOUT</button>
-<p style="color:#777;font-size:12px">Demo checkout. Connect a payment processor before accepting real orders.</p>
-</div></div>
+<div id="cartPanel" class="panel"><div id="shade"></div><aside>
+<div class="cartHead"><h2>YOUR CART</h2><button id="closeCart">×</button></div>
+<div id="items"></div>
+<div class="cartFoot"><div class="total"><span>Subtotal</span><b id="total">$0.00</b></div>
+<button class="btn full" id="checkout">CHECKOUT</button>
+<p class="note">Checkout is a demo until a payment provider is connected.</p></div>
+</aside></div>
+<div id="toast"></div>
+<footer>© 2026 The Explicit Lotus Fashion</footer>
 
 <script>
 const products=[
-{id:1,name:"Lotus Signature Tee",price:28,desc:"Classic graphic tee."},
-{id:2,name:"Explicit Lotus Hoodie",price:58,desc:"Bold premium pullover."},
-{id:3,name:"Red Lotus Crewneck",price:52,desc:"Statement everyday crewneck."},
-{id:4,name:"Lotus Street Cap",price:25,desc:"Embroidered adjustable cap."},
-{id:5,name:"Blackout Lotus Tee",price:30,desc:"Dark graphic tee."},
-{id:6,name:"Lotus Varsity Jacket",price:95,desc:"Statement outerwear."}
+{id:1,name:"Dangerously Distressed",price:15,sizes:["30/30"],imgs:["images/product-1.jpg"],desc:"Men's distressed denim with a heavily frayed finish."},
+{id:2,name:"Spike Capri Denim Shorts",price:25,sizes:["30/30"],imgs:["images/product-2.jpg"],desc:"Capri-length denim shorts with spike details."},
+{id:3,name:"Spike Knee Stacked Jeans",price:35,sizes:["30/30"],imgs:["images/product-3.jpg"],desc:"Stacked jeans with distressed knees and spike details."},
+{id:4,name:"Split Black & White Capri Denim",price:25,sizes:["30/30"],imgs:["images/product-4.jpg"],desc:"Split black-and-white capri denim shorts."},
+{id:5,name:"Black Distressed Skinny Jeans",price:25,sizes:["30/30"],imgs:["images/product-5.jpg"],desc:"Black skinny jeans with a distressed finish."},
+{id:6,name:"Distressed Spike Stacked Jeans",price:35,sizes:["28/30"],imgs:["images/product-6.jpg"],desc:"Distressed stacked jeans with spike details."},
+{id:7,name:"Distressed Denim Shorts",price:25,sizes:["30/30"],imgs:["images/product-7.jpg"],desc:"Distressed denim shorts with a raw-edge finish."},
+{id:8,name:"Distressed Hand-Sewn Denim Jacket",price:50,sizes:["M"],imgs:["images/product-8-front.jpg","images/product-8-back.jpg"],desc:"Men's medium distressed denim jacket with hand-sewn lettering and distressed detailing."}
 ];
 let cart=JSON.parse(localStorage.getItem("lotusCart")||"[]");
 const money=n=>"$"+n.toFixed(2);
-function save(){localStorage.setItem("lotusCart",JSON.stringify(cart));update()}
-function update(){document.getElementById("count").textContent=cart.reduce((a,b)=>a+b.qty,0)}
-function render(){
-document.getElementById("products").innerHTML=products.map(p=>`
-<div class="product"><div class="pic">EXPLICIT<br><span>LOTUS</span></div><div class="info">
-<h3>${p.name}</h3><p>${p.desc}</p><b>${money(p.price)}</b>
-<button class="add" onclick="add(${p.id})">ADD TO CART</button></div></div>`).join("");
+function save(){localStorage.setItem("lotusCart",JSON.stringify(cart));renderCart()}
+function toast(t){let x=document.getElementById("toast");x.textContent=t;x.classList.add("show");setTimeout(()=>x.classList.remove("show"),1600)}
+function renderProducts(){
+ document.getElementById("products").innerHTML=products.map(p=>`
+ <article class="card">
+ <div class="photo"><img id="img-${p.id}" src="${p.imgs[0]}" alt="${p.name}">${p.imgs.length>1?`<div class="thumbs">${p.imgs.map(x=>`<button data-id="${p.id}" data-src="${x}"><img src="${x}" alt=""></button>`).join("")}</div>`:""}</div>
+ <div class="info"><div class="title"><h3>${p.name}</h3><strong>${money(p.price)}</strong></div>
+ <p>${p.desc}</p><label>SIZE<select id="size-${p.id}">${p.sizes.map(s=>`<option>${s}</option>`).join("")}</select></label>
+ <button class="btn add" data-id="${p.id}">ADD TO CART</button></div></article>`).join("");
+ document.querySelectorAll(".add").forEach(b=>b.onclick=()=>{
+  let p=products.find(x=>x.id==b.dataset.id),s=document.getElementById("size-"+p.id).value;
+  let old=cart.find(x=>x.id==p.id&&x.size==s); old?old.qty++:cart.push({id:p.id,size:s,qty:1});save();toast("Added to cart");openCart();
+ });
+ document.querySelectorAll(".thumbs button").forEach(b=>b.onclick=()=>document.getElementById("img-"+b.dataset.id).src=b.dataset.src);
 }
-function add(id){let p=products.find(x=>x.id===id),x=cart.find(x=>x.id===id);x?x.qty++:cart.push({...p,qty:1});save();renderCart();openCart()}
-function remove(id){cart=cart.filter(x=>x.id!==id);save();renderCart()}
 function renderCart(){
-let box=document.getElementById("items");
-box.innerHTML=cart.length?cart.map(x=>`<div class="item"><span><b>${x.name}</b><br><small>Qty: ${x.qty}</small></span><span>${money(x.price*x.qty)}<br><button class="remove" onclick="remove(${x.id})">Remove</button></span></div>`).join(""):"<p>Your cart is empty.</p>";
-document.getElementById("total").textContent=money(cart.reduce((a,b)=>a+b.price*b.qty,0));
+ let n=cart.reduce((a,x)=>a+x.qty,0),total=0;document.getElementById("count").textContent=n;
+ document.getElementById("items").innerHTML=cart.length?cart.map((x,i)=>{let p=products.find(y=>y.id==x.id);total+=p.price*x.qty;return`
+ <div class="item"><img src="${p.imgs[0]}"><div><b>${p.name}</b><span>Size: ${x.size}</span><span>${money(p.price)} × ${x.qty}</span>
+ <div class="qty"><button data-i="${i}" data-a="minus">−</button><span>${x.qty}</span><button data-i="${i}" data-a="plus">+</button><button data-i="${i}" data-a="remove">Remove</button></div></div></div>`}).join(""):`<div class="empty">Your cart is empty.<br><a href="#shop">VIEW SHOP</a></div>`;
+ document.getElementById("total").textContent=money(total);
+ document.querySelectorAll(".qty button").forEach(b=>b.onclick=()=>{let i=+b.dataset.i,a=b.dataset.a;if(a=="plus")cart[i].qty++;if(a=="minus"){cart[i].qty--;if(cart[i].qty<1)cart.splice(i,1)}if(a=="remove")cart.splice(i,1);save()});
 }
-function openCart(){document.getElementById("overlay").classList.add("show");renderCart()}
-function closeCart(e){if(!e||e.target===e.currentTarget)document.getElementById("overlay").classList.remove("show")}
-function checkout(){if(!cart.length)return alert("Your cart is empty.");alert("Demo checkout — payment processing has not been connected yet.")}
-render();update();renderCart();
+function openCart(){document.getElementById("cartPanel").classList.add("open")}
+function closeCart(){document.getElementById("cartPanel").classList.remove("open")}
+document.getElementById("openCart").onclick=openCart;document.getElementById("closeCart").onclick=closeCart;document.getElementById("shade").onclick=closeCart;
+document.getElementById("checkout").onclick=()=>alert(cart.length?"Your cart is ready! Connect Stripe, PayPal, or another payment provider to accept real orders.":"Your cart is empty.");
+renderProducts();renderCart();
 </script>
-</body>
-</html>
+</body></html>
